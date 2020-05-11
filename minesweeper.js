@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', startGame)
 // Define your `board` object here!
 var board = {
   cells:[
-    {row:0, col:0, isMine:true, hidden:true},
+    {row:0, col:0, isMine:false, hidden:true},
     {row:0, col:1, isMine:false, hidden:true},
     {row:0, col:2, isMine:false, hidden:true},
     {row:0, col:3, isMine:false, hidden:true},
@@ -12,18 +12,18 @@ var board = {
     {row:1, col:1, isMine:false, hidden:true},
     {row:1, col:2, isMine:false, hidden:true},
     {row:1, col:3, isMine:true, hidden:true},
-    {row:1, col:4, isMine:true, hidden:true},
+    {row:1, col:4, isMine:false, hidden:true},
     {row:2, col:0, isMine:true, hidden:true},
     {row:2, col:1, isMine:false, hidden:true},
     {row:2, col:2, isMine:false, hidden:true},
     {row:2, col:3, isMine:true, hidden:true},
-    {row:2, col:4, isMine:true, hidden:true},
+    {row:2, col:4, isMine:false, hidden:true},
     {row:3, col:0, isMine:true, hidden:true},
-    {row:3, col:1, isMine:false, hidden:true},
+    {row:3, col:1, isMine:true, hidden:true},
     {row:3, col:2, isMine:false, hidden:true},
-    {row:3, col:3, isMine:true, hidden:true},
-    {row:3, col:4, isMine:true, hidden:true},
-    {row:4, col:0, isMine:true, hidden:true},
+    {row:3, col:3, isMine:false, hidden:true},
+    {row:3, col:4, isMine:false, hidden:true},
+    {row:4, col:0, isMine:false, hidden:true},
     {row:4, col:1, isMine:false, hidden:true},
     {row:4, col:2, isMine:false, hidden:true},
     {row:4, col:3, isMine:true, hidden:true},
@@ -58,7 +58,7 @@ function checkForWin () {
   for(let i=0; i<board.cells.length; i++) {
     var cell = board.cells[i]
 
-    if(cell.isMine && !cell.isMarked) {
+    if(cell.isMine && !cell.isMarked || cell.hidden && !cell.isMine) {
       isWinner = false
     }
   }
