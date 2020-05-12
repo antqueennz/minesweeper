@@ -30,18 +30,25 @@ var board = {
     {row:4, col:4, isMine:true, hidden:true},
   ]
 }
-  
+//This function randomises the number of mines
+function randomiseMine() {
+    for(let i=0; i<board.cells.length; i++) {
+      var randomNumber = Math.floor(Math.random()* 11)
+      var cell = board.cells[i]
+      cell.isMine = randomNumber < 3
+    }
+}
+
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
   for(let i=0; i<board.cells.length; i++) {
     var cell = board.cells[i]
-    
     cell.surroundingMines = countSurroundingMines(cell)
+    randomiseMine()
   }
-  
   lib.initBoard()
-
+  
   document.onclick = checkForWin
   document.oncontextmenu = checkForWin
 }
