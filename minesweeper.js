@@ -3,50 +3,54 @@ document.addEventListener('DOMContentLoaded', startGame)
 // Define your `board` object here!
 var board = {
   cells:[
-    {row:0, col:0, isMine:false, hidden:true},
-    {row:0, col:1, isMine:false, hidden:true},
-    {row:0, col:2, isMine:false, hidden:true},
-    {row:0, col:3, isMine:false, hidden:true},
-    {row:0, col:4, isMine:false, hidden:true},
-    {row:1, col:0, isMine:false, hidden:true},
-    {row:1, col:1, isMine:false, hidden:true},
-    {row:1, col:2, isMine:false, hidden:true},
-    {row:1, col:3, isMine:true, hidden:true},
-    {row:1, col:4, isMine:false, hidden:true},
-    {row:2, col:0, isMine:true, hidden:true},
-    {row:2, col:1, isMine:false, hidden:true},
-    {row:2, col:2, isMine:false, hidden:true},
-    {row:2, col:3, isMine:true, hidden:true},
-    {row:2, col:4, isMine:false, hidden:true},
-    {row:3, col:0, isMine:true, hidden:true},
-    {row:3, col:1, isMine:true, hidden:true},
-    {row:3, col:2, isMine:false, hidden:true},
-    {row:3, col:3, isMine:false, hidden:true},
-    {row:3, col:4, isMine:false, hidden:true},
-    {row:4, col:0, isMine:false, hidden:true},
-    {row:4, col:1, isMine:false, hidden:true},
-    {row:4, col:2, isMine:false, hidden:true},
-    {row:4, col:3, isMine:true, hidden:true},
-    {row:4, col:4, isMine:true, hidden:true},
+    {row:0, col:0, isMine:randomiseMine(), hidden:true},
+    {row:0, col:1, isMine:randomiseMine(), hidden:true},
+    {row:0, col:2, isMine:randomiseMine(), hidden:true},
+    {row:0, col:3, isMine:randomiseMine(), hidden:true},
+    {row:0, col:4, isMine:randomiseMine(), hidden:true},
+    {row:1, col:0, isMine:randomiseMine(), hidden:true},
+    {row:1, col:1, isMine:randomiseMine(), hidden:true},
+    {row:1, col:2, isMine:randomiseMine(), hidden:true},
+    {row:1, col:3, isMine:randomiseMine(), hidden:true},
+    {row:1, col:4, isMine:randomiseMine(), hidden:true},
+    {row:2, col:0, isMine:randomiseMine(), hidden:true},
+    {row:2, col:1, isMine:randomiseMine(), hidden:true},
+    {row:2, col:2, isMine:randomiseMine(), hidden:true},
+    {row:2, col:3, isMine:randomiseMine(), hidden:true},
+    {row:2, col:4, isMine:randomiseMine(), hidden:true},
+    {row:3, col:0, isMine:randomiseMine(), hidden:true},
+    {row:3, col:1, isMine:randomiseMine(), hidden:true},
+    {row:3, col:2, isMine:randomiseMine(), hidden:true},
+    {row:3, col:3, isMine:randomiseMine(), hidden:true},
+    {row:3, col:4, isMine:randomiseMine(), hidden:true},
+    {row:4, col:0, isMine:randomiseMine(), hidden:true},
+    {row:4, col:1, isMine:randomiseMine(), hidden:true},
+    {row:4, col:2, isMine:randomiseMine(), hidden:true},
+    {row:4, col:3, isMine:randomiseMine(), hidden:true},
+    {row:4, col:4, isMine:randomiseMine(), hidden:true},
   ]
 }
-//This function randomises the number of mines
+//This function randomises the number and cell locations of mines
 function randomiseMine() {
-    for(let i=0; i<board.cells.length; i++) {
+  if (Math.random() < 0.2) {
+    return true
+  } else {
+    return false
+  }
+}
+    /*for(let i=0; i<board.cells.length; i++) {
       var randomNumber = Math.floor(Math.random()* 11)
       var cell = board.cells[i]
       cell.isMine = randomNumber < 3
-    }
-}
+    }*/
 
 
 function startGame () {
-  // Don't remove this function call: it makes the game work!
   for(let i=0; i<board.cells.length; i++) {
     var cell = board.cells[i]
     cell.surroundingMines = countSurroundingMines(cell)
-    randomiseMine()
   }
+// Don't remove this function call: it makes the game work!
   lib.initBoard()
   
   document.onclick = checkForWin
@@ -54,12 +58,9 @@ function startGame () {
 }
 
 // Define this function to look for a win condition:
-//
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  // You can use this function call to declare a winner (once you've
-  // detected that they've won, that is!)
   var isWinner = true
 
   for(let i=0; i<board.cells.length; i++) {
@@ -70,6 +71,8 @@ function checkForWin () {
     }
   }
   if (isWinner) {
+// You can use this function call to declare a winner (once you've
+// detected that they've won, that is!)
     lib.displayMessage('You win!')
   }
 }
@@ -97,3 +100,7 @@ function countSurroundingMines (cell) {
   return count
 }
 
+
+function refreshPage(){
+  window.location.reload();
+} 
