@@ -32,7 +32,7 @@ var board = {
 }
 //This function randomises the number and cell locations of mines
 function randomiseMine() {
-  if (Math.random() < 0.2) {
+  if (Math.random() < 0.25) {
     return true
   } else {
     return false
@@ -101,6 +101,6 @@ function countSurroundingMines (cell) {
 }
 
 
-function refreshPage(){
+function refresh(){
   window.location.reload();
 } 
